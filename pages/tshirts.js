@@ -72,4 +72,5 @@ export async function getServerSideProps(context) {
     props: { products: JSON.parse(JSON.stringify(tshirts)) },
   }
 }
+mongoose.disconnect();
 export default Tshirts;
