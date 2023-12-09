@@ -29,7 +29,7 @@ const SignIn = () => {
   const handleSubmit= async(e)=>{
     e.preventDefault()
     const data={email,password};
-    let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signIn`,{ mode: 'no-cors'},{
+    let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signIn`,{
       method:'POST',
       headers:{"Content-type":"application/json",
     },
