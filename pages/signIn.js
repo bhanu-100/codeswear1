@@ -35,7 +35,7 @@ const SignIn = () => {
     },
     body: JSON.stringify(data),
 
-    })
+    },{ mode: 'no-cors'})
     let response = await res.json()
     console.log(response)
     setEmail("")
