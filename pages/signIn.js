@@ -29,13 +29,13 @@ const SignIn = () => {
   const handleSubmit= async(e)=>{
     e.preventDefault()
     const data={email,password};
-    let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signIn`,{
+    let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signIn`,{ mode: 'no-cors'},{
       method:'POST',
       headers:{"Content-type":"application/json",
     },
     body: JSON.stringify(data),
 
-    },{ mode: 'no-cors'})
+    })
     let response = await res.json()
     console.log(response)
     setEmail("")
