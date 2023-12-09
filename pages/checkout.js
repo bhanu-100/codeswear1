@@ -63,7 +63,7 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
     const initiatePayment = async () => {
         let oid = Math.floor(Math.random() * Date.now())
         let data = { oid, Cart, SubTotal, email,address,name,pincode,city,state,phone }
-        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`,{mode:"no-cors"}, {
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
             method: "POST", // or 'PUT'
             headers: {
                 "Content-Type": "application/json",
