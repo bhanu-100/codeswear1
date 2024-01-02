@@ -11,7 +11,7 @@ const Caps = ({products}) => {
       
 <section className="min-h-screen text-gray-600 body-font flex flex-wrap m-4 container px-5 py-24 mx-auto">
 <Head>
-      <title>Caps - codeswear.com</title>
+      <title>Caps - ietianswear.com</title>
       </Head>
   {Object.keys(products).length===0 && <p> Sorry all the caps are curently out of stock.New stock coing soon.Stay Tuned!</p>}
       {Object.keys(products).map((item)=>{return <div  key={products[item]._id} className="mx-[5%] lg:w-[15%] md:w-1/2 p-4 w-full shadow-2xl ">

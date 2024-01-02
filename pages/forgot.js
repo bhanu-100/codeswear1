@@ -33,7 +33,7 @@ const [password, setPassword] = useState("")
     return (
         <div className='mt-20 min-h-screen'>
           <Head>
-            <title>Forgot Password - codeswear.com</title>
+            <title>Forgot Password - ietianswear.com</title>
            </Head>
         <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">

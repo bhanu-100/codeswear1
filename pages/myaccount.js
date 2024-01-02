@@ -135,7 +135,7 @@ const Myaccount = ({user,Signout}) => {
       theme="light"
       />
         <Head>
-      <title>Myaccount - codeswear.com</title>
+      <title>Myaccount - ietianswear.com</title>
       </Head>
       <h2 className='font-bold text-2xl flex items-center justify-center my-8'>My Account</h2>
       <div className='container m-auto '>           

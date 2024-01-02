@@ -70,7 +70,7 @@ const SignIn = () => {
     return (
         <div className='min-h-screen mt-20'>
           <Head>
-      <title>SignIn - codeswear.com</title>
+      <title>SignIn - ietianswear.com</title>
       </Head>
             <ToastContainer
             position="bottom-center"

@@ -24,12 +24,12 @@ const MyOrder = ({order,clearCart}) => {
     return (
         <section className="text-gray-600 body-font overflow-hidden min-h-screen">
           <Head>
-      <title>Order - codeswear.com</title>
+      <title>Order - ietianswear.com</title>
       </Head>
   <div className="container px-5 py-24 mx-auto">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-        <h2 className="text-sm title-font text-gray-500 tracking-widest">CODESWEAR.COM</h2>
+        <h2 className="text-sm title-font text-gray-500 tracking-widest">IETIANSWEAR.COM</h2>
         <h1 className="text-gray-700 text-3xl title-font font-medium mb-4">Order Id #{order.orderId}</h1>
         <p className="leading-relaxed text-gray-900 ">Your order has been placed successfully.</p>
         <p> Your payment status is :  <span className="text-red-500">{order.status}</span></p>

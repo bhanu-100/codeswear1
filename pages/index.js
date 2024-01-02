@@ -34,7 +34,7 @@ const Home=()=> {
   return (
     <main className="min-h-screen mt-16">
       <Head>
-      <title>Home - codeswear.com</title>
+      <title>Home - ietianswear.com</title>
       </Head>
        <div className="slide-container">
         <Slide>

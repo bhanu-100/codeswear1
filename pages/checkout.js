@@ -133,7 +133,7 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
         <div className='container m-auto '>
             <Head>
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-                <title>CheckOut - codeswear.com</title>
+                <title>CheckOut - ietianswear.com</title>
             </Head>
             <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} />
             <h1 className='font-bold text-3xl my-8 text-center'>CheckOut</h1>
