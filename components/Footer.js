@@ -73,7 +73,7 @@ const Footer = () => {
                   <a className="text-gray-600 hover:text-gray-800">+91 6263466850</a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">✉ bhanusinghx100@gmail.com</a>
+                  <a className="text-gray-600 hover:text-gray-800">bhanusinghx100@gmail.com</a>
                 </li>
                 <li>
                   <a className="text-gray-600 hover:text-gray-800">ADDRESS-IET DAVV,INDORE</a>
