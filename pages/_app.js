@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'CodesWear',
+  title: 'ietiansWear',
   description: 'Wear the code',
 }
 export default function MyApp({ Component, pageProps }) {
