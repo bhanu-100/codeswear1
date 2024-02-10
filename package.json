@@ -27,6 +27,7 @@
     "mongoose": "^7.5.3",
     "paytmchecksum": "^1.5.1",
     "prop-types": "^15.7.2",
+    "nodemailer": "^6.9.9",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.11.0",
     "react-responsive-carousel": "^3.2.23",
