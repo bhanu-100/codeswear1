@@ -25,7 +25,7 @@ const [password, setPassword] = useState("")
     })
     let p = await a.json()
     if(p.success)
-    {setPassword(p.passkey)}
+    {setPassword("check your mail")}
     else{
       setPassword("user not found")
     }
