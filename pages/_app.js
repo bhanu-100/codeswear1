@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'ietiansWear',
+  title: 'ietianswear',
   description: 'Wear the code',
 }
 export default function MyApp({ Component, pageProps }) {
@@ -61,13 +61,13 @@ export default function MyApp({ Component, pageProps }) {
     }
     setSubTotal(subt)
   }
-  const addToCart=(itemCode,qty,price,name,size,variant)=>{
+  const addToCart=(itemCode,qty,price,name,size,variant,img)=>{
       let newCart=Cart;
       if(itemCode in Cart){
         newCart[itemCode].qty=Cart[itemCode].qty+qty;
       }
       else{
-          newCart[itemCode]={qty: 1 ,price,name,size,variant};
+          newCart[itemCode]={qty: 1 ,price,name,size,variant,img};
       }
       setCart(newCart)
       SaveCart(newCart)
@@ -82,7 +82,7 @@ export default function MyApp({ Component, pageProps }) {
         theme: "light",
         });
   }
-  const removeFromCart=(itemCode,qty,price,name,size,variant)=>{
+  const removeFromCart=(itemCode,qty,price,name,size,variant,img)=>{
     let newCart=Cart;
     if(itemCode in Cart){
       newCart[itemCode].qty=Cart[itemCode].qty-qty;
@@ -94,9 +94,9 @@ export default function MyApp({ Component, pageProps }) {
     setCart(newCart)
     SaveCart(newCart)
 }
-const buyNow=(itemCode,qty,price,name,size,variant)=>{
+const buyNow=(itemCode,qty,price,name,size,variant,img)=>{
   let newCart={}
-  newCart[itemCode]= {qty: 1 ,price,name,size,variant};
+  newCart[itemCode]= {qty: 1 ,price,name,size,variant,img};
     setCart(newCart);
     SaveCart(newCart);
     Router.push('/checkout')

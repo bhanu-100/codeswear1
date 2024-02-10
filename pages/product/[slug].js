@@ -163,8 +163,8 @@ export default  function Page({buyNow,addToCart,product,variants}) {
           {stock && <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>}
          {!stock && <span className="title-font font-medium text-2xl text-gray-900">Out of stock!</span>}
           <div className='flex '>
-          <button disabled={!stock} onClick={()=>{buyNow(`${product.slug}`,1,`${product.price}`,`${product.title}`,size,color)}} className="disabled:bg-pink-300 flex mx-5 text-white bg-pink-500 border-0 py-2 px-8 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
-          <button disabled={!stock} onClick={()=>{addToCart(`${product.slug}`,1,`${product.price}`,`${product.title}`,size,color)}} className="disabled:bg-pink-300 flex mx-5 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">Add to Cart</button>
+          <button disabled={!stock} onClick={()=>{buyNow(`${product.slug}`,1,`${product.price}`,`${product.title}`,size,color,`${product.img}`)}} className="disabled:bg-pink-300 flex mx-5 text-white bg-pink-500 border-0 py-2 px-8 focus:outline-none hover:bg-pink-600 rounded">Buy Now</button>
+          <button disabled={!stock} onClick={()=>{addToCart(`${product.slug}`,1,`${product.price}`,`${product.title}`,size,color,`${product.img}`)}} className="disabled:bg-pink-300 flex mx-5 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">Add to Cart</button>
           </div>
 
 {/*  
