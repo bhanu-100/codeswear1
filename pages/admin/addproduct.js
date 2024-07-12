@@ -15,9 +15,9 @@ const addproduct = ({userDetail}) => {
   const [slug, setSlug] = useState("");
   const [img, setImg] = useState("");
   const [desc, setDesc] = useState("");
-  const [category, setCategory] = useState("");
-  const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
+  const [category, setCategory] = useState("tshirt");
+  const [size, setSize] = useState("S");
+  const [color, setColor] = useState("Red");
   const [price, setPrice] = useState("");
   const [availableQty, setAvailableQty] = useState(0);
 
@@ -150,21 +150,36 @@ const addproduct = ({userDetail}) => {
                 </div>
               </div>
               <div>
-                <label htmlFor="size" className="block text-sm font-medium leading-6 text-gray-900">Enter Size(XXL/XL/L/S)</label>
+                <label htmlFor="size" className="block text-sm font-medium leading-6 text-gray-900">Enter Size</label>
                 <div className="mt-2">
-                  <input value={size}  onChange={handleChange} id="size" name="size" type="text" autoComplete="size" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6"/>
+                  <select value={size}  onChange={handleChange} id="size" name="size" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
+                   <option value="S">S</option>
+                   <option value="L">L</option>
+                   <option value="XL">XL</option>
+                   <option value="XXL">XXL</option>
+                  </select>
                 </div>
               </div>
               <div>
-                <label htmlFor="category" className="block text-sm font-medium leading-6 text-gray-900">Enter Category(tshirt/hood/mug/cap)</label>
+                <label htmlFor="category" className="block text-sm font-medium leading-6 text-gray-900">Enter Category</label>
                 <div className="mt-2">
-                  <input value={category}  onChange={handleChange} id="category" name="category" type="text" autoComplete="category" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6"/>
+                <select value={category}  onChange={handleChange} id="category" name="category" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
+                   <option value="tshirt">Tshirt</option>
+                   <option value="hood">Hoodie</option>
+                   <option value="mug">Mug</option>
+                   <option value="cap">Cap</option>
+                  </select>
                 </div>
               </div>
               <div>
                 <label htmlFor="color" className="block text-sm font-medium leading-6 text-gray-900">Enter Color(Red/Yellow/Blue/Black)</label>
                 <div className="mt-2">
-                  <input value={color}  onChange={handleChange} id="color" name="color" type="text" autoComplete="color" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6"/>
+                <select value={color}  onChange={handleChange} id="color" name="color" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
+                   <option value="Red">Red</option>
+                   <option value="Yellow">Yellow</option>
+                   <option value="Blue">Blue</option>
+                   <option value="Black">Black</option>
+                  </select>
                 </div>
               </div>
               <div>
@@ -176,7 +191,7 @@ const addproduct = ({userDetail}) => {
               <div>
                 <label htmlFor="availableQty" className="block text-sm font-medium leading-6 text-gray-900">Enter availableQty</label>
                 <div className="mt-2">
-                  <input value={availableQty}  onChange={handleChange} id="availableQty" name="availableQty" type="number" autoComplete="title" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6"/>
+                  <input value={availableQty}  onChange={handleChange} id="availableQty" name="availableQty" type="text" autoComplete="title" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6"/>
                 </div>
               </div>
               <div>
