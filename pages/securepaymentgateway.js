@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 const SecurePaymentGateway = () => {
     return (
-        <div className='mt-10 min-h-screen p-6 bg-pink-100'>
+        <div className='md:mt-10 mt-40 min-h-screen p-6 bg-pink-100'>
             <Head>
                 <title>Secure Payment Gateway - ietianswear.com</title>
             </Head>

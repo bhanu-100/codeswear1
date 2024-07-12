@@ -30,7 +30,7 @@ const [password, setPassword] = useState("")
     }
   }
     return (
-        <div className='mt-20 min-h-screen'>
+        <div className='md:mt-10 mt-40 min-h-screen'>
           <Head>
             <title>Forgot Password - ietianswear.com</title>
            </Head>

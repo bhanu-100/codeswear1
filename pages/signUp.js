@@ -56,7 +56,7 @@ const SignUp = () => {
       });
   }
     return (
-        <div className='min-h-full mt-20'>
+        <div className='min-h-full md:mt-10 mt-40'>
           <Head>
       <title>SignIn - ietianswear.com</title>
       </Head>

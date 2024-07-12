@@ -8,7 +8,7 @@ import Head from 'next/head';
 
 const Hoodies = ({products}) => {
     return (
-<section className="text-gray-600 body-font flex flex-wrap m-4 container px-5 py-24 mx-auto min-h-screen md:mt-4 mt-20">
+<section className="text-gray-600 body-font flex flex-wrap m-4 container px-5 py-24 mx-auto min-h-screen md:mt-10 mt-40">
 <Head>
       <title>Hoodies - ietianswear.com</title>
       </Head>

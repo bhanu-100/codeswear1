@@ -99,7 +99,7 @@ const addproduct = ({userDetail}) => {
   }
 
   return (
-    <div className='min-h-full mt-20'>
+    <div className='min-h-full md:mt-10 mt-40'>
     <Head>
        <title>Addproduct - ietianswear.com</title>
     </Head>

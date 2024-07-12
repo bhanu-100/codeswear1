@@ -44,7 +44,7 @@ const vieworder = ({userDetail}) => {
     }, [userDetail])
 
   return (
-    <div className="py-14 mt-20 min-h-screen px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto ">
+    <div className="py-14 md:mt-10 mt-40 min-h-screen px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto ">
         <Head>
       <title>Vieworder - ietianswear.com</title>
       </Head>

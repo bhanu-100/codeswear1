@@ -67,7 +67,7 @@ const SignIn = () => {
     }
     }
     return (
-        <div className='min-h-screen mt-20'>
+        <div className='min-h-screen md:mt-10 mt-40'>
           <Head>
       <title>SignIn - ietianswear.com</title>
       </Head>

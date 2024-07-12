@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 const TermsAndConditions = () => {
     return (
-        <div className='mt-10 min-h-screen p-6 bg-pink-100'>
+        <div className='md:mt-10 mt-40 min-h-screen p-6 bg-pink-100'>
             <Head>
                 <title>Terms and Conditions - ietianswear.com</title>
             </Head>
