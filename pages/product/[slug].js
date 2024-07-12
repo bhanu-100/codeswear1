@@ -78,7 +78,7 @@ export default  function Page({buyNow,addToCart,product,variants}) {
       theme="light"
       />
      <Head>
-      <title>{product.title} - codeswear.com</title>
+      <title>{product.title} - ietianswear.com</title>
       </Head>
   <div className="container px-5 py-24 mx-auto ">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">

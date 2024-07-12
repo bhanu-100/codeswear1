@@ -47,24 +47,24 @@ export async function getServerSideProps(context) {
   let products = await  Product.find({category:"hood"})
   let hoods={}
   for(let item of products){
-    if(item.title in hoods){
-      if(!hoods[item.title].color.includes(item.color) && item.availableQty > 0){
-        hoods[item.title].color.push(item.color)
+    if(item.slug in hoods){
+      if(!hoods[item.slug].color.includes(item.color) && item.availableQty > 0){
+        hoods[item.slug].color.push(item.color)
       }
-      if(!hoods[item.title].size.includes(item.size) && item.availableQty > 0){
-        hoods[item.title].size.push(item.size)
+      if(!hoods[item.slug].size.includes(item.size) && item.availableQty > 0){
+        hoods[item.slug].size.push(item.size)
       }
         
     }
     else{
-      hoods[item.title]=JSON.parse(JSON.stringify(item))
+      hoods[item.slug]=JSON.parse(JSON.stringify(item))
       if(item.availableQty > 0){
-        hoods[item.title].color=[item.color]
-        hoods[item.title].size=[item.size]
+        hoods[item.slug].color=[item.color]
+        hoods[item.slug].size=[item.size]
       }
       else{
-        hoods[item.title].color=[]
-        hoods[item.title].size=[]
+        hoods[item.slug].color=[]
+        hoods[item.slug].size=[]
       }
     }
   }

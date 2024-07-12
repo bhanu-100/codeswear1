@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react'
 import { Router, useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { Navigate } from 'react-router';
 const inter = Inter({ subsets: ['latin'] })
+const jwt = require('jsonwebtoken');
 
 export const metadata = {
   title: 'ietianswear',
@@ -21,12 +21,13 @@ export default function MyApp({ Component, pageProps }) {
   const [SubTotal, setSubTotal] = useState(0);
   const [user, setUser] = useState({value:null});
   const [key, setKey] = useState();
-  const Router = useRouter()
-
-
+  const [userDetail, setUserDetail] = useState({});
+  
+  const Router = useRouter();
+ 
   useEffect(() => {
     Router.events.on("routeChangeStart",()=>{
-      setProgress(40)
+      setProgress(70)
     })
     Router.events.on("routeChangeComplete",()=>{
       setProgress(100)
@@ -40,15 +41,35 @@ export default function MyApp({ Component, pageProps }) {
       console.error(error)
       localStorage.clear()
     }
-     const token=localStorage.getItem("token")
-     if(token){
-      setUser({value:token})
+
+    const token = localStorage.getItem('token');
+
+    const fetchUserDetail = async(email) => {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/userdetail`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+        const res = await response.json();
+        setUserDetail(res.user);
+    };
+
+    if (token) {
+      setUser({ value: token });
+      const decoded = jwt.decode(token);
+      if (decoded && decoded.email) {
+        fetchUserDetail(decoded.email);
+      }
     }
     setKey(Math.random())
   }, [Router.query]);
+
   const Signout=()=>{
     localStorage.removeItem("token")
     setUser({value:null})
+    setUserDetail({})
     setKey(Math.random())
     Router.push("/")
   }
@@ -115,6 +136,7 @@ const buyNow=(itemCode,qty,price,name,size,variant,img)=>{
       theme: "light",
       });
   }
+
   return (
     <>
           <LoadingBar
@@ -135,8 +157,8 @@ const buyNow=(itemCode,qty,price,name,size,variant,img)=>{
             pauseOnHover
             theme="light"
             />
-      {key && <div className=' w-full fixed z-50 top-0'>  <Navbar Signout={Signout}  user={user} key={key} Cart={Cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} SubTotal={SubTotal}/></div>}
-      <Component buyNow={buyNow} user={user} Signout={Signout} Cart={Cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} SubTotal={SubTotal}  {...pageProps} />
+      {key && <div className=' w-full fixed z-50 top-0'>  <Navbar Signout={Signout}  user={user} userDetail={userDetail} key={key} Cart={Cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} SubTotal={SubTotal}/></div>}
+      <Component buyNow={buyNow} user={user} userDetail={userDetail} Signout={Signout} Cart={Cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} SubTotal={SubTotal}  {...pageProps} />
       <Footer/>
     </>
   )

@@ -3,20 +3,18 @@ import connectDb from "@/middleware/mongoose";
 
 const handler = async (req, res) => {
     if(req.method=="POST"){
-      for(let i=0;i<req.body.length;i++){
         let p=new Product({
-            title:req.body[i].title ,
-            slug:req.body[i].slug ,
-            img: req.body[i].img,
-            desc: req.body[i].desc,
-            category:req.body[i].category,
-            size:req.body[i].size ,
-            color: req.body[i].color,
-            price:req.body[i].price ,
-            availableQty: req.body[i].availableQty
+            title:req.body.title,
+            slug:req.body.slug,
+            img: req.body.img,
+            desc: req.body.desc,
+            category:req.body.category,
+            size:req.body.size ,
+            color: req.body.color,
+            price:req.body.price ,
+            availableQty: req.body.availableQty
         })
         await p.save()
-      }
       res.status(200).json({success:"success"})
     }
     else{

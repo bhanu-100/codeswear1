@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 
-const Orders = ({user,userDetail}) => {
+const vieworder = ({userDetail}) => {
   const [orders, setOrders] = useState([])
   const [date, setDate] = useState()
     const router= useRouter();
@@ -13,41 +13,50 @@ const Orders = ({user,userDetail}) => {
       month: "long",
       day: "numeric",
     };
-    
+
     useEffect(() => {
       const d = new Date()
       setDate(d)
       const fetchOrders=async()=>{
-        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders`, {
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/allorders`, {
           method: "POST", // or 'PUT'
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({email:userDetail.email}),
+          body: JSON.stringify(),
         })
         let res = await a.json()
         setOrders(res.orders)
       }
-      if(!localStorage.getItem("token")){
-        router.push("/")
+      if(localStorage.getItem("token")){
+        if(userDetail){
+          if(userDetail.admin==false){
+            router.push("/")
+          }
+          else{
+            fetchOrders();
+          }
+        }
       }
       else{
-        fetchOrders();
+        router.push("/")
       }
-    }, [])
-    return (      
-<div className="py-14 mt-20 min-h-screen px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto ">
-<Head>
-      <title>Orders - ietiansswear.com</title>
+    }, [userDetail])
+
+  return (
+    <div className="py-14 mt-20 min-h-screen px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto ">
+        <Head>
+      <title>Vieworder - ietianswear.com</title>
       </Head>
-  <div className="flex justify-start item-start space-y-2 flex-col">
-  {user.value? <h1 className="text-3xl dark:text- lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">{userDetail.name}</h1>:<h1 className="text-3xl dark:text- lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Name</h1>}
+
+      <div className="flex justify-start item-start space-y-2 flex-col">
+  <h1 className="text-3xl dark:text- lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">All Orders</h1>
     <p className="text-base dark:text-gray-600 font-medium leading-6 text-gray-700">{date && date.toLocaleDateString("en-US", options)}</p>
   </div>
   <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
     <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
       <div className="flex flex-col justify-start items-start  bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-        <p className="text-lg md:text-xl dark:text- font-semibold leading-6 xl:leading-5 text-gray-800">Customer’s Cart</p>
+        <p className="text-lg md:text-xl dark:text- font-semibold leading-6 xl:leading-5 text-gray-800">Orders</p>
        {orders.map((item)=>{
         let products = item.products;
          return <Link key={item._id} href={"/order?id="+item._id}>
@@ -79,7 +88,8 @@ const Orders = ({user,userDetail}) => {
       </div>
     </div>
   </div>
-</div>
-    );
+
+    </div>
+  )
 }
-export default Orders;
+export default vieworder;

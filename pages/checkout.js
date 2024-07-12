@@ -6,10 +6,9 @@ import Head from 'next/head'
 import Script from 'next/script';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const jwt = require('jsonwebtoken');
 const Paytm = require('paytmchecksum');
 
-const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) => {
+const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, SubTotal }) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
@@ -19,7 +18,6 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
     const [state, setState] = useState("")
     const [disabled, setDisabled] = useState(true)
        
-    let decoded = jwt.decode(user.value);
     const handleChange = async(e) => {
         if (e.target.name == "name") {
             setName(e.target.value)
@@ -42,15 +40,13 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
                 setCity(pinJson[e.target.value][0])
                 setState(pinJson[e.target.value][1])
             }
-            else{
-               setCity("")
-               setState("")
-            }
-         }
-         else{
-            setCity("")
-            setState("")
-         }
+        }
+        }
+        else if (e.target.name == "city") {     
+            setCity(e.target.value)
+        }
+        else if (e.target.name == "state") {     
+            setState(e.target.value)
         }
 
         if (name.length > 3 && email.length > 3 && phone.length > 3 && address.length > 3 && pincode.length > 3) {
@@ -116,6 +112,7 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
             });
     }
     }
+    
     return (
     <div className='min-h-screen mt-20'>
             <ToastContainer
@@ -142,13 +139,13 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
                 <div className='px-2 w-1/2'>
                     <div className="relative mb-4">
                         <label htmlFor="name" className="leading-7 text-sm text-gray-600">Name</label>
-                       {user.value ? <input onClick={()=>{setName(decoded.name)}} value={name} type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} /> : <input value={name} onChange={handleChange} type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
+                       {user.value ? <input onClick={()=>{setName(userDetail.name)}} onChange={handleChange} value={name} type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" /> : <input value={name} onChange={handleChange} type="text" id="name" name="name" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
                     </div>
                 </div>
                 <div className='px-2 w-1/2'>
                     <div className="relative mb-4">
                         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-                        {user.value ? <input onClick={()=>{ setEmail(decoded.email)}} value={email}   type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} />: <input value={email} onChange={handleChange} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
+                        {user.value ? <input onClick={()=>{ setEmail(userDetail.email)}} value={email}   type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true}/>: <input value={email} onChange={handleChange} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
                         
                     </div>
                 </div>
@@ -158,13 +155,13 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
                     <div className='px-2 w-1/2'>
                         <div className="relative mb-4">
                             <label htmlFor="phone" className="leading-7 text-sm text-gray-600">Phone</label>
-                           {user.value && decoded.phone? <input  onClick={()=>{setPhone(decoded.phone)}} value={phone} type="text" id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} /> : <input value={phone} onChange={handleChange} type="text" id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
+                           {user.value && userDetail.phone? <input  onClick={()=>{setPhone(userDetail.phone)}} onChange={handleChange} value={phone} type="text" id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" /> : <input value={phone} onChange={handleChange} type="text" id="phone" name="phone" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
                         </div>
                     </div>
                     <div className='px-2 w-1/2'>
                         <div className="relative mb-4">
                             <label htmlFor="pincode" className="leading-7 text-sm text-gray-600">Pincode</label>
-                            {user.value && decoded.pincode? <input value={pincode} onClick={()=>{setPincode(decoded.pincode)}} onMouseLeave={handleChange}  type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} /> : <input value={pincode} onChange={handleChange} type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
+                            {user.value && userDetail.pincode? <input value={pincode} onClick={()=>{setPincode(userDetail.pincode)}} onMouseLeave={handleChange} onChange={handleChange} type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/> : <input value={pincode} onChange={handleChange} type="text" id="pincode" name="pincode" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />}
                         </div>
                     </div>
                 </div>
@@ -172,19 +169,19 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
                     <div className='px-2 w-1/2'>
                         <div className="relative mb-4">
                             <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
-                            <input   onChange={handleChange} value={city} type="text" id="city" name="city" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true}  />
+                            <input   onChange={handleChange} value={city} type="text" id="city" name="city" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                         </div>
                     </div>
                     <div className='px-2 w-1/2'>
                         <div className="relative mb-4">
                             <label htmlFor="state"  className="leading-7 text-sm text-gray-600">State</label>
-                            <input  onChange={handleChange} value={state} type="text" id="state" name="state" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} />
+                            <input  onChange={handleChange} value={state} type="text" id="state" name="state" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
                         </div>
                     </div>
                 </div>
                 <div className="relative mb-4">
                     <label htmlFor="address" className="leading-7 text-sm text-gray-600">Address</label>
-                   {user.value && decoded.phone ?  <textarea onClick={()=>{setAddress(decoded.address)}} onMouseLeave={handleChange} value={address}  id="address" name="address" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 h-15  text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" readOnly={true}></textarea> : <textarea value={address} onChange={handleChange} id="address" name="address" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 h-15  text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>}
+                   {user.value && userDetail.address ?  <textarea onClick={()=>{setAddress(userDetail.address)}}  onChange={handleChange} value={address}  id="address" name="address" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 h-15  text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea> : <textarea value={address} onChange={handleChange} id="address" name="address" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 h-15  text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>}
                 </div>
             </div>
             <h2 className='font-bold my-8'>2.Review Cart items & Pay</h2>
@@ -203,7 +200,7 @@ const CheckOut = ({user,Cart,clearCart, addToCart, removeFromCart, SubTotal }) =
                 <div className='font-bold text-xl'>SubTotal: ₹{SubTotal}</div>
             </div>
             <div className='flex  mt-5'>
-                <Link href={"/checkout"}><button onClick={initiatePayment} disabled={disabled} className=" disabled:bg-pink-300 flex m-1 text-white bg-pink-500 border-0 py-3 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"><BsFillBagCheckFill className='m-1' />PAY  ₹{SubTotal}</button></Link>
+                <Link href={"/checkout"}><button onClick={initiatePayment} onMouseLeave={handleChange} disabled={disabled} className=" disabled:bg-pink-300 flex m-1 text-white bg-pink-500 border-0 py-3 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"><BsFillBagCheckFill className='m-1' />PAY  ₹{SubTotal}</button></Link>
             </div>
         </div>
         </div>

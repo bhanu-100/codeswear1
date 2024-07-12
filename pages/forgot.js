@@ -3,7 +3,6 @@ import React , { useEffect ,useState}from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Head from 'next/head';
-const jwt = require('jsonwebtoken');
 
 const Forgot = () => {
 const [email, setEmail] = useState("")
@@ -25,9 +24,9 @@ const [password, setPassword] = useState("")
     })
     let p = await a.json()
     if(p.success)
-    {setPassword("check your mail")}
+    {setPassword("The password has been sent to your email.")}
     else{
-      setPassword("user not found")
+      setPassword("Your email address is incorrect.")
     }
   }
     return (
@@ -38,7 +37,7 @@ const [password, setPassword] = useState("")
         <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Link href={"/"} className="flex title-font font-medium items-center  justify-center text-gray-900">
-          <Image src='/icon.png' alt='' height={10} width={50} />
+          <Image src='/icon1.png' alt='' height={10} width={50} />
           </Link>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Forgot Your Password</h2>
           </div>

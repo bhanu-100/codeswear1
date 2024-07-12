@@ -48,25 +48,25 @@ export async function getServerSideProps(context) {
   let products = await  Product.find({category:"cap"})
   let caps={}
   for(let item of products){
-    if(item.title in caps){
-      if(!caps[item.title].color.includes(item.color) && item.availableQty > 0){
-        caps[item.title].color.push(item.color)
+    if(item.slug in caps){
+      if(!caps[item.slug].color.includes(item.color) && item.availableQty > 0){
+        caps[item.slug].color.push(item.color)
       }
-      if(!caps[item.title].size.includes(item.size) && item.availableQty > 0){
-        caps[item.title].size.push(item.size)
+      if(!caps[item.slug].size.includes(item.size) && item.availableQty > 0){
+        caps[item.slug].size.push(item.size)
       }
         
     }
     else{
-      caps[item.title]=JSON.parse(JSON.stringify(item))
+      caps[item.slug]=JSON.parse(JSON.stringify(item))
       if(item.availableQty > 0){
-        caps[item.title].color=[item.color]
-        caps[item.title].size=[item.size]
+        caps[item.slug].color=[item.color]
+        caps[item.slug].size=[item.size]
       }
       else
       {
-        caps[item.title].color=[]
-        caps[item.title].size=[]
+        caps[item.slug].color=[]
+        caps[item.slug].size=[]
       }
     }
   }

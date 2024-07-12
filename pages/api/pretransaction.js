@@ -39,7 +39,7 @@ const handler = async (req, res) => {
             return
            }
 
-        let order =new Order({
+        let order = new Order({
             email:req.body.email,
             name:req.body.name,
             orderId:req.body.oid,

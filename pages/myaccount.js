@@ -1,11 +1,10 @@
 import React , { useEffect ,useState} from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-const jwt = require('jsonwebtoken');
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Myaccount = ({user,Signout}) => {
+const Myaccount = ({user,userDetail,Signout}) => {
     const [name, setName] = useState("")
     const [opassword, setOpassword] = useState("")
     const [npassword, setNpassword] = useState("")
@@ -16,7 +15,6 @@ const Myaccount = ({user,Signout}) => {
     const [pincode, setPincode] = useState("")
     const router= useRouter();
 
-    let decoded = jwt.decode(user.value);
     useEffect(() => {
         
         if(!localStorage.getItem("token")){
@@ -37,7 +35,7 @@ const Myaccount = ({user,Signout}) => {
             setPincode(e.target.value)
         }
         else if (e.target.name == "opassword") {
-            setEmail(decoded.email)
+            setEmail(userDetail.email)
             setOpassword(e.target.value)
         }
         else if (e.target.name == "npassword") {
@@ -67,7 +65,6 @@ const Myaccount = ({user,Signout}) => {
             progress: undefined,
             theme: "light",
             });
-         Signout();
     }
     const changePassword = async()=>{
         if(npassword == cnpassword){
@@ -150,7 +147,7 @@ const Myaccount = ({user,Signout}) => {
                 <div className='px-2 w-1/2'>
                     <div className="relative mb-4">
                         <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email (Cannot Change)</label>
-                      <input value={email} onClick={()=>{setEmail(decoded.email)}} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} />
+                      <input value={email} onClick={()=>{setEmail(userDetail.email)}} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} />
                         
                     </div>
                 </div>

@@ -37,7 +37,6 @@ const SignIn = () => {
 
     })
     let response = await res.json()
-    console.log(response)
     setEmail("")
     setPassword("")
     if(response.success){
@@ -87,7 +86,7 @@ const SignIn = () => {
 <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 ">
   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
   <Link href={"/"} className="flex title-font font-medium items-center  justify-center text-gray-900">
-    <Image src='/icon.png' alt='' height={10} width={50} />
+    <Image src='/icon1.png' alt='' height={10} width={50} />
   </Link>
     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
   </div>
