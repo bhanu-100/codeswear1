@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MyOrder = ({order,clearCart}) => {
+const MyOrder = ({order,clearCart,userDetail}) => {
   const router = useRouter()
   const [date, setDate] = useState()
   const [status, setStatus] = useState(order.status);
@@ -158,7 +158,7 @@ const MyOrder = ({order,clearCart}) => {
             </button>
         </div>
 
-        <div className="md:ml-20 ml-0">
+        {userDetail.admin && <div className="md:ml-20 ml-0">
             <form onSubmit={handleSubmit} className="space-y-6" method="POST">
                 <div className="flex md:flex-row flex-col">
                     <div className="mr-10">
@@ -233,7 +233,7 @@ const MyOrder = ({order,clearCart}) => {
                     </button>
                 </div>
             </form>
-        </div>
+        </div>}
     </div>
 </div>
 
