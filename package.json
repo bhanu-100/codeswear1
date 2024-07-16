@@ -28,6 +28,8 @@
     "paytmchecksum": "^1.5.1",
     "prop-types": "^15.7.2",
     "nodemailer": "^6.9.9",
+    "razorpay": "^2.9.4",
+    "react-razorpay": "^2.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.11.0",
     "react-responsive-carousel": "^3.2.23",
