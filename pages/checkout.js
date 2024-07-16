@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Script from 'next/script';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const Paytm = require('paytmchecksum');
+const Razorpay = require('razorpay');
 
 const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, SubTotal }) => {
     const [name, setName] = useState("")
@@ -16,8 +16,7 @@ const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, Su
     const [pincode, setPincode] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
-    const [disabled, setDisabled] = useState(true)
-       
+   
     const handleChange = async(e) => {
         if (e.target.name == "name") {
             setName(e.target.value)
@@ -49,16 +48,10 @@ const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, Su
             setState(e.target.value)
         }
 
-        if (name.length > 3 && email.length > 3 && phone.length > 3 && address.length > 3 && pincode.length > 3) {
-            setDisabled(false)
-        }
-        else {
-            setDisabled(true)
-        }
     }
+
     const initiatePayment = async () => {
-        let oid = Math.floor(Math.random() * Date.now())
-        let data = { oid, Cart, SubTotal, email,address,name,pincode,city,state,phone }
+        let data = {Cart, SubTotal, email,address,name,pincode,city,state,phone}
         let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
             method: "POST", // or 'PUT'
             headers: {
@@ -67,52 +60,59 @@ const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, Su
             body: JSON.stringify(data),
         })
         let txnRes = await a.json()
-        if(txnRes.success){ 
-        let txnToken=txnRes.txnToken
-        var config = {
-            "root": "",
-            "flow": "DEFAULT",
-            "data": {
-                "orderId": oid, /* update order id */
-                "token": txnToken, /* update token value */
-                "tokenType": "TXN_TOKEN",
-                "amount": SubTotal /* update amount */
+        if(txnRes.success==true){ 
+        let txn = txnRes.ord;
+          var options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
+            amount: txn.amount, 
+            currency: "INR",
+            name: "Ietianswear",
+            description: "your order is ready!",
+            image: "/icon1.png",
+            order_id: txn.id, 
+            callback_url: `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
+            prefill: {
+                "name": userDetail.name,
+                "email": userDetail.email,
+                "contact": userDetail.phone
             },
-            "handler": {
-                "notifyMerchant": function (eventName, data) {
-                    console.log("notifyMerchant handler function called");
-                    console.log("eventName => ", eventName);
-                    console.log("data => ", data);
-                }
+            notes: {
+                "address": "ajio86915@gmail.com"
+            },
+            theme: {
+                "color": "#DB2777"
             }
         };
-
-        // initialze configuration using init method
-        window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-            // after successfully updating configuration, invoke JS Checkout
-            window.Paytm.CheckoutJS.invoke();
-        }).catch(function onError(error) {
-            console.log("error => ", error);
+        const paymentObject = new window.Razorpay(options);
+       
+        paymentObject.on('payment.failed', function (response){
+                console.log(response.error.code);
+                console.log(response.error.description);
+                console.log(response.error.source);
+                console.log(response.error.step);
+                console.log(response.error.reason);
+                console.log(response.error.metadata.order_id);
+                console.log(response.error.metadata.payment_id);
         });
-    }
-    else{
-        console.log(txnRes.error)
-        if(txnRes.cartClear){
-        clearCart();
+        paymentObject.open();
         }
-        toast.error(txnRes.error, {
-            position: "bottom-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        else{
+                if(txnRes.cartClear){
+                clearCart();
+                }
+                toast.error(txnRes.error, {
+                    position: "bottom-center",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
     }
-    }
-    
+
     return (
     <div className='min-h-screen md:mt-20 mt-44'>
             <ToastContainer
@@ -132,7 +132,7 @@ const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, Su
                 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
                 <title>CheckOut - ietianswear.com</title>
             </Head>
-            <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`} />
+            <Script type="application/javascript" src="https://checkout.razorpay.com/v1/checkout.js"/>
             <h1 className='font-bold text-3xl my-8 text-center'>CheckOut</h1>
             <h2 className='font-bold my-8'>1.Delivery Details</h2>
             <div className='container mx-auto px-4'>           
@@ -221,7 +221,7 @@ const CheckOut = ({user,userDetail,Cart,clearCart, addToCart, removeFromCart, Su
                 <div className='font-bold text-xl'>SubTotal: ₹{SubTotal}</div>
             </div>
             <div className='flex  mt-5'>
-                <Link href={"/checkout"}><button onClick={initiatePayment} onMouseLeave={handleChange} disabled={disabled} className=" disabled:bg-pink-300 flex m-1 text-white bg-pink-500 border-0 py-3 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"><BsFillBagCheckFill className='m-1' />PAY  ₹{SubTotal}</button></Link>
+                <Link href={"/checkout"}><button onClick={initiatePayment}  className=" flex m-1 text-white bg-pink-500 border-0 py-3 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"><BsFillBagCheckFill className='m-1' />PAY  ₹{SubTotal}</button></Link>
             </div>
         </div>
         </div>

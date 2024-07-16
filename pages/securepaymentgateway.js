@@ -11,9 +11,9 @@ const SecurePaymentGateway = () => {
                 <h1 className='text-4xl font-bold text-center mb-8'>Secure Payment Gateway</h1>
                 
                 <section className='mb-12'>
-                    <h2 className='text-2xl font-semibold mb-4'>Why Choose Paytm?</h2>
+                    <h2 className='text-2xl font-semibold mb-4'>Why Choose Razorpay?</h2>
                     <p className='text-lg mb-4'>
-                        At ietianswear.com, we prioritize your security and convenience. That’s why we have partnered with Paytm, a leading payment gateway in India, to ensure that your transactions are fast, secure, and seamless.
+                        At ietianswear.com, we prioritize your security and convenience. That’s why we have partnered with Razorpay, a leading payment gateway in India, to ensure that your transactions are fast, secure, and seamless.
                     </p>
                     <ul className='list-disc list-inside text-lg'>
                         <li>Instant and secure payments</li>
@@ -27,7 +27,7 @@ const SecurePaymentGateway = () => {
                     <h2 className='text-2xl font-semibold mb-4'>How to Make a Payment</h2>
                     <ol className='list-decimal list-inside text-lg'>
                         <li>Add your desired items to the cart and proceed to checkout.</li>
-                        <li>Choose Paytm as your preferred payment method.</li>
+                        <li>Choose Razorpay as your preferred payment method.</li>
                         <li>Enter your payment details and complete the transaction.</li>
                         <li>Receive an instant confirmation and enjoy your purchase!</li>
                     </ol>
@@ -36,14 +36,14 @@ const SecurePaymentGateway = () => {
                 <section className='mb-12'>
                     <h2 className='text-2xl font-semibold mb-4'>Your Security, Our Priority</h2>
                     <p className='text-lg'>
-                        We understand the importance of security when it comes to online transactions. Paytm uses advanced encryption and secure servers to protect your information. Shop with confidence knowing that your data is safe with us.
+                        We understand the importance of security when it comes to online transactions. Razorpay uses advanced encryption and secure servers to protect your information. Shop with confidence knowing that your data is safe with us.
                     </p>
                 </section>
 
                 <section className='text-center'>
                     <h2 className='text-2xl font-semibold mb-4'>Need Help?</h2>
                     <p className='text-lg'>
-                        If you have any questions or need assistance with your payment, feel free to contact our support team at <a href='mailto:ajio86915@gmail.com' className='text-blue-500'>support@ietianswear.com</a>.
+                        If you have any questions or need assistance with your payment, feel free to contact our support team at <a href='mailto:support@ietianswear.com' className='text-blue-500'>support@ietianswear.com</a>.
                     </p>
                 </section>
             </div>

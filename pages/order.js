@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect,useState } from 'react';
 import Order from '@/models/Order';
 import Head from 'next/head';
+import Link from 'next/link';
 import mongoose from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -153,9 +154,10 @@ const MyOrder = ({order,clearCart,userDetail}) => {
                 </div>
             ))}
 
-            <button className="flex m-auto mt-10 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">
+            <Link href="https://www.indiapost.gov.in/_layouts/15/dop.portal.tracking/trackconsignment.aspx"><button className="flex m-auto mt-10 text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded">
                 Track Order
-            </button>
+            </button></Link>
+          
         </div>
 
         {userDetail.admin && <div className="md:ml-20 ml-0">
@@ -165,9 +167,8 @@ const MyOrder = ({order,clearCart,userDetail}) => {
                         <label htmlFor="status" className="block text-sm font-medium leading-6 text-gray-900">Update payment status</label>
                         <div className="mt-2">
                             <select value={status} onChange={handleChange} id="status" name="status" className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6">
-                                <option value="Paid">Paid</option>
-                                <option value="Pending">Pending</option>
                                 <option value="Initiated">Initiated</option>
+                                <option value="Paid">Paid</option>
                             </select>
                         </div>
                     </div>

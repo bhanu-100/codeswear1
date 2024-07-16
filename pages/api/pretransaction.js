@@ -1,12 +1,15 @@
 import { request } from 'https';
-const PaytmChecksum = require('paytmchecksum');
 import Order from "@/models/Order";
 import connectDb from "@/middleware/mongoose";
 import Product from '@/models/Product';
 import pincodes from "pincodes.json";
+const Razorpay = require('razorpay');
 
 const handler = async (req, res) => {
     if (req.method == "POST") {
+        // if userdetail is valid
+        if (req.body.name.length > 3 && req.body.email.length > 8 && req.body.phone.length == 10 && req.body.address.length > 3 && req.body.pincode.length == 6) {
+
         // if pincode is not serviceable
         if(!Object.keys(pincodes).includes(req.body.pincode)){
             res.status(200).json({success:false,"error":"your pincode is not serviceable.",cartClear:false})
@@ -38,11 +41,21 @@ const handler = async (req, res) => {
             res.status(200).json({success:false,"error":"The price of some items in your have been changed.plesae try again.",cartClear:true})
             return
            }
-
+    
+        const instance = new Razorpay({ key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, key_secret: process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET });
+        
+        var options = {
+            amount: (req.body.SubTotal)*100,  
+            currency: "INR",
+            receipt: req.body.oid
+          };
+          
+        const ord = await instance.orders.create(options)
+        if(ord.status=='created'){
         let order = new Order({
             email:req.body.email,
             name:req.body.name,
-            orderId:req.body.oid,
+            orderId:ord.id,
             products:req.body.Cart,
             phone:req.body.phone,
             address:req.body.address,
@@ -51,61 +64,17 @@ const handler = async (req, res) => {
             city:req.body.city,
             state:req.body.state
         })
-        await order.save()
-        
-        var paytmParams = {};
-        paytmParams.body = {
-            "requestType": "Payment",
-            "mid": process.env.NEXT_PUBLIC_PAYTM_MID,
-            "websiteName": process.env.NEXT_PUBLIC_PAYTM_WEBSITE,
-            "orderId": req.body.oid,
-            "callbackUrl": `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
-            "txnAmount": {
-                "value": req.body.SubTotal,
-                "currency": "INR",
-            },
-            "userInfo": {
-                "custId": req.body.email,
-            },
-        };
-        const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), process.env.PAYTM_MKEY)
-
-        paytmParams.head = {
-            "signature": checksum
-        };
-        var post_data = JSON.stringify(paytmParams);
-        const requestAsync = async () => {
-            return new Promise((resolve, reject) => {
-                var options = {
-                    hostname: 'securegw.paytm.in',
-
-                    port: 443,
-                    path: `/theia/api/v1/initiateTransaction?mid=${process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.body.oid}`,
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Content-Length': post_data.length
-                    }
-                };
-                var response = "";
-                var post_req = request(options, function (post_res) {
-                    post_res.on('data', function (chunk) {
-                        response += chunk;
-                    });
-                    post_res.on('end', function () {
-                        // console.log('Response: ', response);
-                        let ress=JSON.parse(response).body
-                        ress.success=true
-                        ress.cartClear=false
-                        resolve(ress)
-                    });
-                });
-                post_req.write(post_data);
-                post_req.end();
-            })
-        }
-        let myr = await requestAsync()
-        res.status(200).json(myr)
+        await order.save();
+        res.status(200).json({success:true,ord:ord});
     }
+    else{
+        res.status(200).json({success:false,"error":"Something wrong try again"});
+    }
+ }
+ else {
+    res.status(200).json({success:false,"error":"Fill the correct details"});
+}
+
+}
 }
 export default connectDb(handler);
