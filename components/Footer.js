@@ -65,13 +65,13 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CONTACT US</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">Bhanu Pratap Singh</span>
+                                <span className="text-gray-600 hover:text-gray-800">Rishi Dubey</span>
                             </li>
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">+91 6263466850</span>
+                                <span className="text-gray-600 hover:text-gray-800">+91 7000525501</span>
                             </li>
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">ajio86915@gmail.com</span>
+                                <span className="text-gray-600 hover:text-gray-800">rishidubey652@gmail.com</span>
                             </li>
                             <li>
                                 <span className="text-gray-600 hover:text-gray-800">ADDRESS-IET DAVV, INDORE, 452020</span>
