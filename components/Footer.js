@@ -65,13 +65,13 @@ const Footer = () => {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CONTACT US</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">Rishi Dubey</span>
+                                <span className="text-gray-600 hover:text-gray-800">Bhanu pratap singh</span>
                             </li>
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">+91 7000525501</span>
+                                <span className="text-gray-600 hover:text-gray-800">+91 6263466850</span>
                             </li>
                             <li>
-                                <span className="text-gray-600 hover:text-gray-800">rishidubey652@gmail.com</span>
+                                <span className="text-gray-600 hover:text-gray-800">bhanusinghx100@gmail.com</span>
                             </li>
                             <li>
                                 <span className="text-gray-600 hover:text-gray-800">ADDRESS-IET DAVV, INDORE, 452020</span>
@@ -82,7 +82,7 @@ const Footer = () => {
             </div>
             <div className="bg-pink-300">
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                    <p className="text-gray-500 text-sm text-center sm:text-left">© 2024 Codewear.com — All Rights Are Reserved</p>
+                    <p className="text-gray-500 text-sm text-center sm:text-left">© 2025 Codewear.com — All Rights Are Reserved</p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <Link className="ml-3 text-gray-500" href="https://www.facebook.com/profile.php?id=100009914970814&mibextid=rS40aB7S9Ucbxw6v">
                             <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
